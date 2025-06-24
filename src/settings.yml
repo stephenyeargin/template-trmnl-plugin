@@ -10,7 +10,7 @@ dark_mode: 'no'
 static_data: ''
 polling_verb: get
 polling_url: 'https://api.vercel.app/blog'
-polling_headers: ''
+polling_headers: 'content-type=application/json'
 name: Plugin Template
 refresh_interval: 1440
 custom_fields:
