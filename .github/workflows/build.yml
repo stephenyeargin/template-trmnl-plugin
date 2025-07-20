@@ -13,6 +13,7 @@ permissions:
 
 jobs:
   check-secret:
+    name: Check if `TRMNL_API_KEY` set
     runs-on: ubuntu-latest
     outputs:
       has-secret: ${{ steps.check.outputs.has-secret }}
@@ -30,7 +31,7 @@ jobs:
           fi
 
   build:
-    name: Verify Build Succeeds
+    name: Verify `trnmlp build` succeeds
     needs: check-secret
     runs-on: ubuntu-latest
     if: needs.check-secret.outputs.has-secret == 'true'
@@ -87,7 +88,7 @@ jobs:
           fi
 
   create-release:
-    name: Create a GitHub Release
+    name: Create a GitHub release
     needs: [check-secret, check-version]
     runs-on: ubuntu-latest
     if: needs.check-version.outputs.should-release == 'true' && needs.check-secret.outputs.has-secret == 'true'
