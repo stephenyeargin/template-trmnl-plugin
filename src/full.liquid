@@ -1,17 +1,33 @@
-<div class="layout layout--row layout--top">
-  <div class="grid grid--cols-2 gap--medium">
+<div class="layout layout--row">
+  <div
+    class="column"
+    data-list-limit="true"
+    data-list-hidden-count="true"
+    data-list-max-height="410"
+    data-list-max-columns="2"
+  >
+    {% for item in data %}
     <div class="item">
       <div class="meta"></div>
       <div class="content">
-        <div class="label label--medium">Full</div>
-        <div class="description">Replace me with your content!</div>
+        <div class="flex gap--medium">
+          <div class="">
+            <div><span class="title title--small clamp--2 clamp--nicely">{{ item.title }}</span></div>
+            <div><span class="label label--small">by {{ item.author }} | {{ item.category }}</span></div>
+            <div><span class="description clamp--2">{{ item.content }}</span></div>
+          </div>
+          <div>
+            <img class="image image-dither w--32" src="https://placehold.co/600x400/000000/FFF?text={{ item.category }}" />
+          </div>
+        </div>
       </div>
     </div>
+    {% endfor %}
   </div>
 </div>
 
 <div class="title_bar">
-  <img class="image" src="https://usetrmnl.com/images/brand/glyphs/glyph--black.svg" />
+  <img class="image image-stroke--medium" src="data:image/svg+xml;base64,{{ logo_svg | base64_encode }}" />
   <span class="title">Plugin Template</span>
   <span class="instance">{{ trmnl.plugin_settings.instance_name }}</span>
 </div>
