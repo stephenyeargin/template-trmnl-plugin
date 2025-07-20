@@ -30,6 +30,7 @@ jobs:
           fi
 
   build:
+    name: Verify Build Succeeds
     needs: check-secret
     runs-on: ubuntu-latest
     if: needs.check-secret.outputs.has-secret == 'true'
@@ -47,6 +48,7 @@ jobs:
         run: bundle exec trmnlp build
 
   check-version:
+    name: Check if VERSION is new
     needs: [check-secret, build]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && needs.check-secret.outputs.has-secret == 'true'
@@ -85,6 +87,7 @@ jobs:
           fi
 
   create-release:
+    name: Create a GitHub Release
     needs: [check-secret, check-version]
     runs-on: ubuntu-latest
     if: needs.check-version.outputs.should-release == 'true' && needs.check-secret.outputs.has-secret == 'true'
@@ -136,6 +139,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   deploy:
+    name: Deploy to TRMNL
     needs: [check-secret, check-version, create-release]
     runs-on: ubuntu-latest
     if: success() && needs.check-secret.outputs.has-secret == 'true'
