@@ -1,28 +1,27 @@
 <div class="layout layout--row">
   <div
-    class="column"
-    data-list-limit="true"
-    data-list-hidden-count="true"
-    data-list-max-height="410"
-    data-list-max-columns="2"
+    class="columns"
+    data-overflow="true"
+    data-overflow-max-cols="2"
+    data-overflow-counter="true"
   >
-    {% for item in data %}
-    <div class="item">
-      <div class="meta"></div>
-      <div class="content">
-        <div class="flex gap--medium">
-          <div class="">
-            <div><span class="title title--small clamp--2 clamp--nicely">{{ item.title }}</span></div>
-            <div><span class="label label--small">by {{ item.author }} | {{ item.category }}</span></div>
-            <div><span class="description clamp--2">{{ item.content }}</span></div>
+    <div class="column">
+      {% for item in data %}
+      <div class="item mb--2 lg:mb--3">
+        <div class="meta"></div>
+        <div class="content flex flex--row flex--top gap--medium lg:gap--large">
+          <div class="w--[66cqw]">
+            <div><span class="title title--small lg:title--base" data-clamp="1">{{ item.title }}</span></div>
+            <div><span class="label label--small lg:label--base">by {{ item.author }} | {{ item.category }}</span></div>
+            <div><span class="description lg:description--large" data-clamp="2">{{ item.content }}</span></div>
           </div>
-          <div>
-            <img class="image image-dither w--32" src="https://placehold.co/600x400/000000/FFF?text={{ item.category }}" />
+          <div class="w--[34cqw]">
+            <img class="image image-dither image--cover w--32 lg:w--40" src="https://placehold.co/600x400/000000/FFF?text={{ item.category }}" />
           </div>
         </div>
       </div>
+      {% endfor %}
     </div>
-    {% endfor %}
   </div>
 </div>
 

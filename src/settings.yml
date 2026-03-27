@@ -19,10 +19,16 @@ custom_fields:
   field_type: author_bio
   description: This is template text you should probably update 😁
   github_url: https://github.com/
-  learn_more_url: https://usetrmnl.com/
+  learn_more_url: https://trmnl.com/
   email_address: email@example.com
 - keyname: example_string
   field_type: string
   name: A Configurable String
   description: Save some data here for use in URLs or controlling the display
   placeholder: An Example Value
+- keyname: example_secret
+  field_type: password
+  name: A Secret String
+  description: You should mask any sensitive information, like API keys
+  placeholder: an-example-value
+
