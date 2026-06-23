@@ -1,5 +1,9 @@
 # TRMNL Plugin
 
+<!--
+[![Build and Deploy](https://github.com/REPO_USER/REPO_NAME/actions/workflows/build.yml/badge.svg)](https://github.com/REPO_USER/REPO_NAME/actions/workflows/build.yml) [![TRMNL Recipe Connections](https://trmnl-badges.gohk.xyz/badge/connections?recipe=PLUGIN_ID)](https://trmnl.com/recipes/PLUGIN_ID)
+-->
+
 ![screenshot](assets/screenshot.png)
 
 ## Development

@@ -7,12 +7,18 @@ watch:
   - src
 
 # values of custom fields (defined in src/settings.yml)
-custom_fields: {}
+custom_fields: {
+  example_string: 'An Example String',
+  example_secret: '{{ env.SECRET }}'
+}
 
 # override variables
 variables:
   trmnl: {
     plugin_settings: {
       instance_name: 'My Instance'
+    },
+    user: {
+      locale: 'en-US'
     }
   }

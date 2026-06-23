@@ -18,11 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Set up Ruby
         id: setup-ruby
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@9eb537ca036ebaed86729dcb9309076e4c5c3b74 # v1.314.0
         with:
           ruby-version: '3.4'
           bundler-cache: true
@@ -36,7 +36,7 @@ jobs:
           echo "$GEM_USER_DIR/bin" >> "$GITHUB_PATH"
 
       - name: Cache trmnlp gem
-        uses: actions/cache@v5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: ${{ steps.gemdir.outputs.dir }}
           key: ${{ runner.os }}-ruby-${{ steps.setup-ruby.outputs.ruby-version }}-trmnl-preview-v1
@@ -79,7 +79,7 @@ jobs:
       should-release: ${{ steps.check.outputs.should-release }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Read VERSION file
         id: version
@@ -115,7 +115,7 @@ jobs:
     if: needs.check-version.outputs.should-release == 'true' && needs.check-secret.outputs.has-secret == 'true'
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           fetch-depth: 0  # Fetch full history for changelog generation
 
@@ -150,7 +150,7 @@ jobs:
           cat release_notes.md
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v3
+        uses: softprops/action-gh-release@718ea10b132b3b2eba29c1007bb80653f286566b # v3.0.1
         with:
           tag_name: v${{ needs.check-version.outputs.version }}
           name: Release v${{ needs.check-version.outputs.version }}
@@ -167,11 +167,11 @@ jobs:
     if: success() && needs.check-secret.outputs.has-secret == 'true'
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Set up Ruby
         id: setup-ruby
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@9eb537ca036ebaed86729dcb9309076e4c5c3b74 # v1.314.0
         with:
           ruby-version: '3.4'
           bundler-cache: true
@@ -185,7 +185,7 @@ jobs:
           echo "$GEM_USER_DIR/bin" >> "$GITHUB_PATH"
 
       - name: Cache trmnlp gem
-        uses: actions/cache@v5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: ${{ steps.gemdir.outputs.dir }}
           key: ${{ runner.os }}-ruby-${{ steps.setup-ruby.outputs.ruby-version }}-trmnl-preview-v1
@@ -209,7 +209,7 @@ jobs:
 
       - name: Create GitHub deployment
         id: create_deployment
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const version = `${{ needs.check-version.outputs.version }}`;
@@ -228,7 +228,7 @@ jobs:
             core.setOutput('deployment-id', String(deployment.data.id));
 
       - name: Mark deployment in progress
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             await github.rest.repos.createDeploymentStatus({
@@ -249,7 +249,7 @@ jobs:
 
       - name: Mark deployment success
         if: steps.push.outcome == 'success'
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             await github.rest.repos.createDeploymentStatus({
@@ -263,7 +263,7 @@ jobs:
 
       - name: Mark deployment failure
         if: steps.push.outcome == 'failure'
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             await github.rest.repos.createDeploymentStatus({
